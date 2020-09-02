@@ -1,6 +1,7 @@
 <template>
   <div>
     Color 1: <input v-model="color1" /> Color 2: <input v-model="color2" />
+    <br><br>
     <template
       v-for="i in 10"
       :key="i">
