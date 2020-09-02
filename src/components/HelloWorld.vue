@@ -34,6 +34,9 @@ export default {
           },
         })
       }, 500),
+      pushColorToSwatches: debounce((index, color) => {
+        this[`picker${index}`].addSwatch(color)
+      }, 500, { leading: true })
     }
   },
   watch: {
@@ -52,11 +55,13 @@ export default {
         }, 100)
       }
     },
-    color1() {
+    color1(newColor, oldColor) {
       this.pushColorsToRouter()
+      this.pushColorToSwatches(1, oldColor)
     },
-    color2() {
+    color2(newColor, oldColor) {
       this.pushColorsToRouter()
+      this.pushColorToSwatches(2, oldColor)
     },
   },
   mounted() {
