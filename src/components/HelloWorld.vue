@@ -16,6 +16,8 @@
 
 <script>
 import Pickr from '@simonwep/pickr'
+import { debounce } from "lodash-es"
+
 export default {
   name: 'HelloWorld',
   data() {
@@ -24,6 +26,14 @@ export default {
       picker1: null,
       color2: "#E9E8E1",
       picker2: null,
+      pushColorsToRouter: debounce(() => {
+        this.$router.push({
+          query: {
+            color1: this.color1,
+            color2: this.color2,
+          },
+        })
+      }, 500),
     }
   },
   watch: {
@@ -43,20 +53,10 @@ export default {
       }
     },
     color1() {
-      this.$router.push({
-        query: {
-          color1: this.color1,
-          color2: this.color2,
-        },
-      })
+      this.pushColorsToRouter()
     },
     color2() {
-      this.$router.push({
-        query: {
-          color1: this.color1,
-          color2: this.color2,
-        },
-      })
+      this.pushColorsToRouter()
     },
   },
   mounted() {
